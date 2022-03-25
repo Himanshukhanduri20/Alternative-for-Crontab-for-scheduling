@@ -1,0 +1,20 @@
+#for python 3.3 or greater
+
+import sched, time
+
+dayLen = 86400  # seconds
+weekLen = 7     # days
+
+dayLen = 1      # We make the days 1 second long for testing
+
+def onlyOnSunday ():
+    tt = time.localtime()
+    exec(open("./Sample.py").read())
+    t = time.mktime(tt)+dayLen*weekLen
+    s.enterabs (t,0,onlyOnSunday)
+
+s = sched.scheduler(time.time, time.sleep)
+tt = time.localtime()
+t = time.mktime(tt)+(6-tt.tm_wday)*dayLen
+s.enterabs (t,0,onlyOnSunday)
+s.run ()    # Run all scheduled events
